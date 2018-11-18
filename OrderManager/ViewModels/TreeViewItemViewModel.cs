@@ -6,64 +6,22 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace OrderManager.ViewModels
 {
-    class TreeViewItemViewModel : INotifyPropertyChanged
+    abstract class TreeViewItemViewModel<T> where T : class //: INotifyPropertyChanged
     {
-        private ObservableCollection<TreeViewItemViewModel> _treeViewItemViewModels;
-        private string _title;
-        private string _customer;
+        protected ObservableCollection<T> _treeViewItemViewModels;
+        protected string _title;
+        protected Page _framePage;
 
-        public TreeViewItemViewModel()
-        {
-
-        }
-
-        virtual public ObservableCollection<TreeViewItemViewModel> TreeViewItemViewModels
-        {
-            get
-            {
-                return _treeViewItemViewModels;
-            }
-            set
-            {
-                _treeViewItemViewModels = value;
-                OnPropertyChanged("TreeViewItemViewModels");
-            }
-        }
-
-        virtual public string Title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                _title = value;
-                OnPropertyChanged("Title");
-            }
-        }
-
-        public string Customer
-        {
-            get
-            {
-                return _customer;
-            }
-            set
-            {
-                _customer = value;
-                OnPropertyChanged("Customer");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        public abstract PageContextViewModel Context { get; set; } 
+        public abstract Page FramePage { get; }
+        public abstract ObservableCollection<T> TreeViewItemViewModels { get; set; }
+        public abstract string Title { get; set; }
+        
     }
 }

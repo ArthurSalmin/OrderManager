@@ -17,7 +17,16 @@ namespace OrderManager.ViewModels
         private ProjectBusiness _pb;
         private Projects _selectedProject;
         private ObservableCollection<Projects> _projectsCollection;
-        private ObservableCollection<TreeViewItemViewModel> _treeViewItems;
+
+        private TreeViewItemCustomerViewModel _treeViewItemCustomerViewModel;
+        private TreeViewItemProjectViewModel _treeViewItemProjectViewModel;
+        private TreeViewItemExecutorViewModel _treeViewItemExecutorViewModel;
+        private TreeViewItemQuestViewModel _treeViewItemQuestViewModel;
+
+        private string _pageCustomerPath = ".\\Pages\\CustomerInformationPage";
+        private string _pageProjectPath = ".\\Pages\\ProjectInformationPage";
+        private string _pageExecutorPath = ".\\Pages\\ExecutorInformationPage";
+        private string _pageQuestPath = ".\\Pages\\QuestInformationPage";
 
         public ObservableCollection<Projects> ProjectsCollection
         {
@@ -29,12 +38,8 @@ namespace OrderManager.ViewModels
             }
         }
 
-        public ObservableCollection<TreeViewItemViewModel> ProjectsModel { get; set; } = new ObservableCollection<TreeViewItemViewModel>();
-
-        //public List<string> Projects
-        //{
-        //    get { return ProjectsCollection.Select(x => x.Name).ToList(); }
-        //}
+        public ObservableCollection<TreeViewItemCustomerViewModel> ProjectsModel { get; set; } =
+            new ObservableCollection<TreeViewItemCustomerViewModel>();
 
         public Projects SelectedProject
         {
@@ -70,26 +75,29 @@ namespace OrderManager.ViewModels
             {
                 ProjectsModel.Add(item);
             }
-
+            _treeViewItemCustomerViewModel.Context.UriPagePAth = _pageCustomerPath;
+            //_treeViewItemCustomerViewModel.Context.UriPagePAth = _pageCustomerPath;
+            //_treeViewItemCustomerViewModel.Context.UriPagePAth = _pageCustomerPath;
+            //_treeViewItemCustomerViewModel.Context.UriPagePAth = _pageCustomerPath;
         }
 
-        private TreeViewItemViewModel GetProject(Projects project)
+        private TreeViewItemCustomerViewModel GetProject(Projects project)
         {
             string CustomerName = _db.Customers.FirstOrDefault(y => y.IdProject == project.Id).FullName;
             var selectedQuest = from quest in _db.Quests
-                             where quest.IdProject == project.Id
-                             select quest;
+                                where quest.IdProject == project.Id
+                                select quest;
             ObservableCollection<Quests> Quests = new ObservableCollection<Quests>(selectedQuest.ToList());
-            ObservableCollection<TreeViewItemViewModel> questsModel = new ObservableCollection<TreeViewItemViewModel>();
+            ObservableCollection<TreeViewItemCustomerViewModel> questsModel = new ObservableCollection<TreeViewItemCustomerViewModel>();
 
             foreach (var item in Quests)
             {
-                questsModel.Add(new TreeViewItemViewModel
+                questsModel.Add(new TreeViewItemCustomerViewModel
                 {
                     Title = item.Description,
-                    TreeViewItemViewModels = new ObservableCollection<TreeViewItemViewModel>
+                    TreeViewItemViewModels = new ObservableCollection<TreeViewItemCustomerViewModel>
                     {
-                        new TreeViewItemViewModel
+                        new TreeViewItemCustomerViewModel
                         {
                             Title = _db.Executors.FirstOrDefault(x => x.Id == item.IdExecutor).FullName
                         }
@@ -97,23 +105,22 @@ namespace OrderManager.ViewModels
                 });
             }
 
-            ObservableCollection<TreeViewItemViewModel> coll = new ObservableCollection<TreeViewItemViewModel>
+            ObservableCollection<TreeViewItemCustomerViewModel> coll = new ObservableCollection<TreeViewItemCustomerViewModel>
             {
-                new TreeViewItemViewModel
+                new TreeViewItemCustomerViewModel
                 {
                     Title = CustomerName
                 },
-                new TreeViewItemViewModel
+                new TreeViewItemCustomerViewModel
                 {
                     Title = "Quests",
                     TreeViewItemViewModels = questsModel
                 }
             };
 
-            TreeViewItemViewModel ret = new TreeViewItemViewModel();
+            TreeViewItemCustomerViewModel ret = new TreeViewItemCustomerViewModel();
             ret.Title = project.Name;
             ret.TreeViewItemViewModels = coll;
-            
             return ret;
         }
 

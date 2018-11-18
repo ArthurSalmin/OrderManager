@@ -24,5 +24,5 @@ D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\OrderManager.csproj.CopyComp
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\OrderManager.exe
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\OrderManager.pdb
 D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\ManagersDb.db
-D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\Page1.g.cs
-D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\Page1.baml
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\ProjectInformationPage.g.cs
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\ProjectInformationPage.baml

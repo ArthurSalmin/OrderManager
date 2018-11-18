@@ -11,12 +11,12 @@ using System.Windows.Controls;
 
 namespace OrderManager.ViewModels
 {
-    class TreeViewItemExecutorViewModel : TreeViewItemViewModel<TreeViewItemExecutorViewModel>, INotifyPropertyChanged
+    class TreeViewItemProjectViewModel : TreeViewItemViewModel<TreeViewItemProjectViewModel>, INotifyPropertyChanged
     {
-        private string _pageExecutorPath = ".\\Pages\\ExecutorInformationPage";
-        public TreeViewItemExecutorViewModel()
+        private string _pageProjectPath = ".\\Pages\\ProjectInformationPage";
+        public TreeViewItemProjectViewModel()
         {
-            Context.PageUri = new Uri(_pageExecutorPath);
+            Context.PageUri = new Uri(_pageProjectPath);
         }
 
         public override string Title
@@ -31,7 +31,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("Title");
             }
         }
-        public override ObservableCollection<TreeViewItemExecutorViewModel> TreeViewItemViewModels
+        public override ObservableCollection<TreeViewItemProjectViewModel> TreeViewItemViewModels
         {
             get
             {

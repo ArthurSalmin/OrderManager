@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Projects\WPF\OrderManager\OrderManager\App.xaml
-2-297315427
+5-416398401
 
-23-1113339084
+28-391704304
 191646563911
-MainWindow.xaml;Pages\Page1.xaml;
+MainWindow.xaml;Pages\CustomerInformationPage.xaml;Pages\ExecutorInformationPage.xaml;Pages\ProjectInformationPage.xaml;Pages\QuestInformationPage.xaml;
 
-False
+True
 
