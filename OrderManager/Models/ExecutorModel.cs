@@ -2,7 +2,7 @@
 
 namespace OrderManager.Models
 {
-    class Executors
+    public class Executors
     {
         public int Id { get; set; }
         public string Image { get; set; }

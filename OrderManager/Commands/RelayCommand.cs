@@ -9,7 +9,7 @@ namespace OrderManager.Commands
 {
     class RelayCommand : ICommand
     {
-        private Action _execute;
+        private Action<object> _execute;
         private Func<object, bool> _canExecute;
 
         public event EventHandler CanExecuteChanged
@@ -18,7 +18,7 @@ namespace OrderManager.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommand(Action execute, Func<object, bool> canExecute = null)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             this._execute = execute;
             this._canExecute = canExecute;
@@ -31,7 +31,7 @@ namespace OrderManager.Commands
 
         public void Execute(object parameter)
         {
-            this._execute();
+            this._execute(parameter);
         }
     }
 }

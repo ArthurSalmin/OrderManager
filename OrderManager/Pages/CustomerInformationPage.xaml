@@ -8,8 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerInformationPage">
     <Grid>
-        <DataGrid>
-            
-        </DataGrid>
+        <ListView x:Name="listView">
+            <ListView.View>
+                <GridView>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Page>

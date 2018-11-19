@@ -1,7 +1,10 @@
-﻿using System;
+﻿using OrderManager.Commands;
+using OrderManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,10 +16,13 @@ namespace OrderManager.ViewModels
 {
     class TreeViewItemExecutorViewModel : TreeViewItemViewModel<TreeViewItemExecutorViewModel>, INotifyPropertyChanged
     {
-        private string _pageExecutorPath = ".\\Pages\\ExecutorInformationPage";
+        private RelayCommand _editExecutor;
+        private ManagerContext _db;
+        private string _pageExecutorPath = "/PagesExecutorInformationPage.xaml";
         public TreeViewItemExecutorViewModel()
         {
-            Context.PageUri = new Uri(_pageExecutorPath);
+            _db = new ManagerContext();
+            Context.PageUri = new Uri(_pageExecutorPath, UriKind.RelativeOrAbsolute);
         }
 
         public override string Title
@@ -43,7 +49,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; }
+        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
 
         public override Page FramePage
         {
@@ -55,6 +61,24 @@ namespace OrderManager.ViewModels
                     _framePage.DataContext = Context;
                 }
                 return _framePage;
+            }
+        }
+
+        public RelayCommand EditExecutor
+        {
+            get
+            {
+                return _editExecutor ?? (new RelayCommand((selectedItem) =>
+                {
+                    if (selectedItem == null) return;
+                    Executors editedExecutor = selectedItem as Executors;
+                    editedExecutor = _db.Executors.Find(editedExecutor.Id);
+                    if (editedExecutor != null)
+                    {
+                        _db.Entry(editedExecutor).State = EntityState.Modified;
+                        _db.SaveChanges();
+                    }
+                }));
             }
         }
 

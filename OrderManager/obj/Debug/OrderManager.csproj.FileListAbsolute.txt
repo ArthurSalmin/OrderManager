@@ -23,6 +23,12 @@ D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\OrderManager.csproj.CoreComp
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\OrderManager.csproj.CopyComplete
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\OrderManager.exe
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\OrderManager.pdb
-D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\ManagersDb.db
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\ProjectInformationPage.g.cs
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\ProjectInformationPage.baml
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\CustomerInformationPage.g.cs
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\ExecutorInformationPage.g.cs
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\QuestInformationPage.g.cs
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\CustomerInformationPage.baml
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\ExecutorInformationPage.baml
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\QuestInformationPage.baml
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\ManagersDb2.db

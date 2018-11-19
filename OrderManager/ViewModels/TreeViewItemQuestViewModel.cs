@@ -1,7 +1,10 @@
-﻿using System;
+﻿using OrderManager.Commands;
+using OrderManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,10 +16,12 @@ namespace OrderManager.ViewModels
 {
     class TreeViewItemQuestViewModel : TreeViewItemViewModel<TreeViewItemQuestViewModel>, INotifyPropertyChanged
     {
-        private string _pageQuestPath = ".\\Pages\\QuestInformationPage";
+        private RelayCommand _editQuest;
+        private ManagerContext _db;
+        private string _pageQuestPath = "/Pages/QuestInformationPage.xaml";
         public TreeViewItemQuestViewModel()
         {
-            Context.PageUri = new Uri(_pageQuestPath);
+            Context.PageUri = new Uri(_pageQuestPath, UriKind.RelativeOrAbsolute);
         }
 
         public override string Title
@@ -43,7 +48,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; }
+        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
 
         public override Page FramePage
         {
@@ -55,6 +60,25 @@ namespace OrderManager.ViewModels
                     _framePage.DataContext = Context;
                 }
                 return _framePage;
+            }
+        }
+
+        public RelayCommand EditQuest
+        {
+            get
+            {
+                return _editQuest ?? 
+                    (new RelayCommand((selectedItem) => 
+                    {
+                        if (selectedItem == null) return;
+                        Quests editedQuest = selectedItem as Quests;
+                        editedQuest = _db.Quests.Find(editedQuest.Id);
+                        if (editedQuest != null)
+                        {
+                            _db.Entry(editedQuest).State = EntityState.Modified;
+                            _db.SaveChanges();
+                        }
+                    }));
             }
         }
 

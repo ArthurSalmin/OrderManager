@@ -24,7 +24,7 @@ namespace OrderManager
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ApplicationViewModel();
+            this.DataContext = new ProjectTreeViewModel();
         }
     }
 }

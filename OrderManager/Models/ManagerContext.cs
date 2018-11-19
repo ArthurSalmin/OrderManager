@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace OrderManager.Models
 {
-    class ManagerContext : DbContext
+    public class ManagerContext : DbContext
     {
         public DbSet<Quests> Quests { get; set; }
         public DbSet<Customers> Customers { get; set; }

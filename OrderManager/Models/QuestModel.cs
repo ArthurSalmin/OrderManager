@@ -1,6 +1,6 @@
 ﻿namespace OrderManager.Models
 {
-    class Quests
+    public class Quests
     {
         public int Id { get; set; }
         public string Description { get; set; }

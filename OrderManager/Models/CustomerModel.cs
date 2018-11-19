@@ -2,7 +2,7 @@
 
 namespace OrderManager.Models
 {
-    class Customers
+    public class Customers
     {
         public int Id { get; set; }
         public string Image { get; set; }

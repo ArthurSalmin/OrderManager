@@ -1,7 +1,10 @@
-﻿using System;
+﻿using OrderManager.Commands;
+using OrderManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,10 +16,13 @@ namespace OrderManager.ViewModels
 {
     class TreeViewItemCustomerViewModel : TreeViewItemViewModel<TreeViewItemCustomerViewModel>, INotifyPropertyChanged
     {
-        private string _pageCustomerPath = ".\\Pages\\CustomerInformationPage";
+        private RelayCommand _editCustomer;
+        private ManagerContext _db;
+        private string _pageCustomerPath = "/Pages/CustomerInformationPage.xaml";
         public TreeViewItemCustomerViewModel()
         {
-            Context.PageUri = new Uri(_pageCustomerPath);
+            _db = new ManagerContext();
+            Context.PageUri = new Uri(_pageCustomerPath, UriKind.RelativeOrAbsolute);
         }
 
         public override string Title
@@ -43,7 +49,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; }
+        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
         
         public override Page FramePage
         {
@@ -55,6 +61,25 @@ namespace OrderManager.ViewModels
                     _framePage.DataContext = Context;
                 }
                 return _framePage;
+            }
+        }
+        
+        public RelayCommand EditCustomer
+        {
+            get
+            {
+                return _editCustomer ??
+                    (new RelayCommand((selectedItem)=> 
+                    {
+                        if (selectedItem == null) return;
+                        Customers editedCustomer = selectedItem as Customers;
+                        editedCustomer = _db.Customers.Find(editedCustomer.Id);
+                        if (editedCustomer != null)
+                        {
+                            _db.Entry(editedCustomer).State = EntityState.Modified;
+                            _db.SaveChanges();
+                        }
+                    }));
             }
         }
 

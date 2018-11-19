@@ -1,7 +1,10 @@
-﻿using System;
+﻿using OrderManager.Commands;
+using OrderManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,10 +16,14 @@ namespace OrderManager.ViewModels
 {
     class TreeViewItemProjectViewModel : TreeViewItemViewModel<TreeViewItemProjectViewModel>, INotifyPropertyChanged
     {
-        private string _pageProjectPath = ".\\Pages\\ProjectInformationPage";
+        private RelayCommand _editProject;
+        private ManagerContext _db;
+
+        private string _pageProjectPath = "/Pages/ProjectInformationPage.xaml";
         public TreeViewItemProjectViewModel()
         {
-            Context.PageUri = new Uri(_pageProjectPath);
+            _db = new ManagerContext();
+            Context.PageUri = new Uri(_pageProjectPath, UriKind.RelativeOrAbsolute);
         }
 
         public override string Title
@@ -43,7 +50,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; }
+        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
 
         public override Page FramePage
         {
@@ -55,6 +62,25 @@ namespace OrderManager.ViewModels
                     _framePage.DataContext = Context;
                 }
                 return _framePage;
+            }
+        }
+        
+        public RelayCommand EditProject
+        {
+            get
+            {
+                return _editProject ??
+                    (_editProject = new RelayCommand((selectedItem) =>
+                    {
+                        if (selectedItem == null) return;
+                        Projects editedProject = selectedItem as Projects;
+                        editedProject = _db.Projects.Find(editedProject.Id);
+                        if (editedProject != null)
+                        {
+                            _db.Entry(editedProject).State = EntityState.Modified;
+                            _db.SaveChanges();
+                        }
+                    }));
             }
         }
 

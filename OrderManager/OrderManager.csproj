@@ -83,17 +83,17 @@
     <Compile Include="Pages\ProjectInformationPage.xaml.cs">
       <DependentUpon>ProjectInformationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProjectBusiness.cs" />
     <Compile Include="Pages\QuestInformationPage.xaml.cs">
       <DependentUpon>QuestInformationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\PageContextViewModel.cs" />
+    <Compile Include="ViewModels\PersonsTreeViewModel.cs" />
     <Compile Include="ViewModels\TreeViewItemCustomerViewModel.cs" />
     <Compile Include="ViewModels\TreeViewItemExecutorViewModel.cs" />
     <Compile Include="ViewModels\TreeViewItemProjectViewModel.cs" />
     <Compile Include="ViewModels\TreeViewItemQuestViewModel.cs" />
     <Compile Include="ViewModels\TreeViewItemViewModel.cs" />
-    <Compile Include="ViewModels\ApplicationViewModel.cs" />
+    <Compile Include="ViewModels\ProjectTreeViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -147,7 +147,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ManagersDb.db">
+    <None Include="ManagersDb2.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
