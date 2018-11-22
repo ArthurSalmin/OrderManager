@@ -1,5 +1,6 @@
 ﻿using OrderManager.Commands;
 using OrderManager.Models;
+using OrderManager.ViewModels.EntitiesViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,17 +13,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace OrderManager.ViewModels
+namespace OrderManager.ViewModels.TreeViewItemViewModels
 {
-    class TreeViewItemCustomerViewModel : TreeViewItemViewModel<TreeViewItemCustomerViewModel>, INotifyPropertyChanged
+    class TreeViewItemQuestViewModel : TreeViewItemViewModel<TreeViewItemQuestViewModel>, INotifyPropertyChanged
     {
-        private RelayCommand _editCustomer;
+        private RelayCommand _editQuest;
         private ManagerContext _db;
-        private string _pageCustomerPath = "/Pages/CustomerInformationPage.xaml";
-        public TreeViewItemCustomerViewModel()
+        private string _pageQuestPath = "/Pages/QuestInformationPage.xaml";
+        public TreeViewItemQuestViewModel()
         {
             _db = new ManagerContext();
-            Context.PageUri = new Uri(_pageCustomerPath, UriKind.RelativeOrAbsolute);
+            Context = new QuestViewModel();
+            Context.PageUri = new Uri(_pageQuestPath, UriKind.RelativeOrAbsolute);
         }
 
         public override string Title
@@ -37,7 +39,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("Title");
             }
         }
-        public override ObservableCollection<TreeViewItemCustomerViewModel> TreeViewItemViewModels
+        public override ObservableCollection<TreeViewItemQuestViewModel> TreeViewItemViewModels
         {
             get
             {
@@ -49,8 +51,8 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
-        
+        public override PageContextViewModel Context { get; set; }
+
         public override Page FramePage
         {
             get
@@ -63,20 +65,20 @@ namespace OrderManager.ViewModels
                 return _framePage;
             }
         }
-        
-        public RelayCommand EditCustomer
+
+        public RelayCommand EditQuest
         {
             get
             {
-                return _editCustomer ??
-                    (new RelayCommand((selectedItem)=> 
+                return _editQuest ?? 
+                    (_editQuest = new RelayCommand((selectedItem) => 
                     {
                         if (selectedItem == null) return;
-                        Customers editedCustomer = selectedItem as Customers;
-                        editedCustomer = _db.Customers.Find(editedCustomer.Id);
-                        if (editedCustomer != null)
+                        Quests editedQuest = selectedItem as Quests;
+                        editedQuest = _db.Quests.Find(editedQuest.Id);
+                        if (editedQuest != null)
                         {
-                            _db.Entry(editedCustomer).State = EntityState.Modified;
+                            _db.Entry(editedQuest).State = EntityState.Modified;
                             _db.SaveChanges();
                         }
                     }));

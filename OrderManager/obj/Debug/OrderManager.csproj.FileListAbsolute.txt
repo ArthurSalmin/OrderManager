@@ -32,3 +32,15 @@ D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\CustomerInformationPag
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\ExecutorInformationPage.baml
 D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\Pages\QuestInformationPage.baml
 D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\ManagersDb2.db
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\System.Windows.Interactivity.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\de\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\en\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\es\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\it\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\Projects\WPF\OrderManager\OrderManager\obj\Debug\GeneratedInternalTypeHelper.g.cs

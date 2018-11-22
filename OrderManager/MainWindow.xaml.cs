@@ -1,4 +1,5 @@
 ﻿using OrderManager.ViewModels;
+using OrderManager.ViewModels.TreeViewItemViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace OrderManager
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ProjectTreeViewModel();
+            this.DataContext = new ApplicationViewModel();
         }
     }
 }

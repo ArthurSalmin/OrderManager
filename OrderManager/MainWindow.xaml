@@ -3,20 +3,58 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:OrderManager"
+        xmlns:behaviours="clr-namespace:OrderManager.Helpers"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl x:Name="tabControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <TabItem Header="Проекты">
                 <DockPanel>
-                    <TreeView  DockPanel.Dock="Left" x:Name="treeView" Width="200" ItemsSource="{Binding ProjectsModel}">
+                    <TreeView DockPanel.Dock="Left" Width="200" ItemsSource="{Binding ProjectsModel}">
+                        <i:Interaction.Behaviors>
+                            <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                        </i:Interaction.Behaviors>
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding TreeViewItemViewModels}">
-                                <TextBlock Text="{Binding Title}"/>
+                                <TextBlock Text="{Binding Title}">
+                                    <!--<TextBlock.InputBindings>
+                                        <MouseBinding Command="{Binding GetCustomerName}" MouseAction="LeftClick" />
+                                    </TextBlock.InputBindings>-->
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown" >
+                                        <i:InvokeCommandAction 
+                                            Command="{Binding GetPath}" 
+                                            CommandParameter="{Binding Path=SelectedItem}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                </TextBlock>
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
+                    <Frame DockPanel.Dock="Right" Source="{Binding PathPage}">
+                    </Frame>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Персоны">
+                <DockPanel>
+                    <StackPanel>
+                        <TreeView  DockPanel.Dock="Left" Width="200" Height="200" ItemsSource="{Binding CustomersModel}">
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding TreeViewItemViewModels}">
+                                    <TextBlock Text="{Binding Title}"/>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                        <TreeView  DockPanel.Dock="Left" Width="200" Height="200" ItemsSource="{Binding ExecutorsModel}">
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding TreeViewItemViewModels}">
+                                    <TextBlock Text="{Binding Title}"/>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </StackPanel>
                     <Grid DockPanel.Dock="Right" Width="auto">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -26,9 +64,6 @@
                         <DataGrid Grid.Row="0" ItemsSource="{Binding ProjectCollection}" SelectedItem="{Binding SelectedProject,Mode=TwoWay}"></DataGrid>
                     </Grid>
                 </DockPanel>
-            </TabItem>
-            <TabItem Header="Персоны">
-                <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
     </Grid>

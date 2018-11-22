@@ -9,6 +9,27 @@
       Title="ExecutorInformationPage">
 
     <Grid>
-        
+        <DockPanel>
+            <Image Width="400" DockPanel.Dock="Left" Source="{Binding ImagePath}"/>
+            <Grid VerticalAlignment="Stretch" DockPanel.Dock="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <ListView VerticalAlignment="Stretch" Grid.Row="0">
+                    <TextBlock DataContext="{Binding Name}"/>
+                    <TextBlock DataContext="{Binding Contacts}"/>
+                </ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1"/>
+                    <Button Grid.Column="2"/>
+                </Grid>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Page>

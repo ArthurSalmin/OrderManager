@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderManager.ViewModels.EntitiesViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,9 +11,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace OrderManager.ViewModels
+namespace OrderManager.ViewModels.TreeViewItemViewModels
 {
-    abstract class TreeViewItemViewModel<T> where T : class //: INotifyPropertyChanged
+    abstract class TreeViewItemViewModel<T> where T : class
     {
         protected ObservableCollection<T> _treeViewItemViewModels;
         protected string _title;
@@ -22,6 +23,5 @@ namespace OrderManager.ViewModels
         public abstract Page FramePage { get; }
         public abstract ObservableCollection<T> TreeViewItemViewModels { get; set; }
         public abstract string Title { get; set; }
-        
     }
 }

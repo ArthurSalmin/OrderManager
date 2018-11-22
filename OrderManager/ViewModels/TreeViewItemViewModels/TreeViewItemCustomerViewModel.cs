@@ -1,28 +1,36 @@
 ﻿using OrderManager.Commands;
 using OrderManager.Models;
+using OrderManager.ViewModels.EntitiesViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace OrderManager.ViewModels
+namespace OrderManager.ViewModels.TreeViewItemViewModels
 {
-    class TreeViewItemExecutorViewModel : TreeViewItemViewModel<TreeViewItemExecutorViewModel>, INotifyPropertyChanged
+    class TreeViewItemCustomerViewModel : TreeViewItemViewModel<TreeViewItemCustomerViewModel>, INotifyPropertyChanged
     {
-        private RelayCommand _editExecutor;
+        private RelayCommand _editCustomer;
         private ManagerContext _db;
-        private string _pageExecutorPath = "/PagesExecutorInformationPage.xaml";
-        public TreeViewItemExecutorViewModel()
+        private string _pageCustomerPath = "/Pages/CustomerInformationPage.xaml";
+        public TreeViewItemCustomerViewModel()
         {
             _db = new ManagerContext();
-            Context.PageUri = new Uri(_pageExecutorPath, UriKind.RelativeOrAbsolute);
+            Context = new CustomerViewModel();
+            Context.PageUri = new Uri(_pageCustomerPath, UriKind.RelativeOrAbsolute);
+        }
+
+        public string PageCustomerPath
+        {
+            get { return _pageCustomerPath; }
+            set
+            {
+                _pageCustomerPath = value;
+                OnPropertyChanged("PageCustomerPath");
+            }
         }
 
         public override string Title
@@ -37,7 +45,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("Title");
             }
         }
-        public override ObservableCollection<TreeViewItemExecutorViewModel> TreeViewItemViewModels
+        public override ObservableCollection<TreeViewItemCustomerViewModel> TreeViewItemViewModels
         {
             get
             {
@@ -49,8 +57,8 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
-
+        public override PageContextViewModel Context { get; set; }
+        
         public override Page FramePage
         {
             get
@@ -63,22 +71,23 @@ namespace OrderManager.ViewModels
                 return _framePage;
             }
         }
-
-        public RelayCommand EditExecutor
+        
+        public RelayCommand EditCustomer
         {
             get
             {
-                return _editExecutor ?? (new RelayCommand((selectedItem) =>
-                {
-                    if (selectedItem == null) return;
-                    Executors editedExecutor = selectedItem as Executors;
-                    editedExecutor = _db.Executors.Find(editedExecutor.Id);
-                    if (editedExecutor != null)
+                return _editCustomer ??
+                    (_editCustomer = new RelayCommand((selectedItem)=> 
                     {
-                        _db.Entry(editedExecutor).State = EntityState.Modified;
-                        _db.SaveChanges();
-                    }
-                }));
+                        if (selectedItem == null) return;
+                        Customers editedCustomer = selectedItem as Customers;
+                        editedCustomer = _db.Customers.Find(editedCustomer.Id);
+                        if (editedCustomer != null)
+                        {
+                            _db.Entry(editedCustomer).State = EntityState.Modified;
+                            _db.SaveChanges();
+                        }
+                    }));
             }
         }
 

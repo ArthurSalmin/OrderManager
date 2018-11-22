@@ -55,6 +55,7 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.109.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,7 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Helpers\BindableSelectedItemBehavior.cs" />
     <Compile Include="Pages\CustomerInformationPage.xaml.cs">
       <DependentUpon>CustomerInformationPage.xaml</DependentUpon>
     </Compile>
@@ -86,14 +87,17 @@
     <Compile Include="Pages\QuestInformationPage.xaml.cs">
       <DependentUpon>QuestInformationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\PageContextViewModel.cs" />
-    <Compile Include="ViewModels\PersonsTreeViewModel.cs" />
-    <Compile Include="ViewModels\TreeViewItemCustomerViewModel.cs" />
-    <Compile Include="ViewModels\TreeViewItemExecutorViewModel.cs" />
-    <Compile Include="ViewModels\TreeViewItemProjectViewModel.cs" />
-    <Compile Include="ViewModels\TreeViewItemQuestViewModel.cs" />
-    <Compile Include="ViewModels\TreeViewItemViewModel.cs" />
-    <Compile Include="ViewModels\ProjectTreeViewModel.cs" />
+    <Compile Include="ViewModels\EntitiesViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\EntitiesViewModels\ExecutorViewModel.cs" />
+    <Compile Include="ViewModels\EntitiesViewModels\PageContextViewModel.cs" />
+    <Compile Include="ViewModels\EntitiesViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\EntitiesViewModels\QuestViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewItemViewModels\TreeViewItemCustomerViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewItemViewModels\TreeViewItemExecutorViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewItemViewModels\TreeViewItemProjectViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewItemViewModels\TreeViewItemQuestViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewItemViewModels\TreeViewItemViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewItemViewModels\ApplicationViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

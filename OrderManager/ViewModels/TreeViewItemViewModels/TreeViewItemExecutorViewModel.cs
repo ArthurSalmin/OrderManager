@@ -1,27 +1,26 @@
 ﻿using OrderManager.Commands;
 using OrderManager.Models;
+using OrderManager.ViewModels.EntitiesViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace OrderManager.ViewModels
+namespace OrderManager.ViewModels.TreeViewItemViewModels
 {
-    class TreeViewItemQuestViewModel : TreeViewItemViewModel<TreeViewItemQuestViewModel>, INotifyPropertyChanged
+    class TreeViewItemExecutorViewModel : TreeViewItemViewModel<TreeViewItemExecutorViewModel>, INotifyPropertyChanged
     {
-        private RelayCommand _editQuest;
+        private RelayCommand _editExecutor;
         private ManagerContext _db;
-        private string _pageQuestPath = "/Pages/QuestInformationPage.xaml";
-        public TreeViewItemQuestViewModel()
+        private string _pageExecutorPath = "/PagesExecutorInformationPage.xaml";
+        public TreeViewItemExecutorViewModel()
         {
-            Context.PageUri = new Uri(_pageQuestPath, UriKind.RelativeOrAbsolute);
+            _db = new ManagerContext();
+            Context = new ExecutorViewModel();
+            Context.PageUri = new Uri(_pageExecutorPath, UriKind.RelativeOrAbsolute);
         }
 
         public override string Title
@@ -36,7 +35,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("Title");
             }
         }
-        public override ObservableCollection<TreeViewItemQuestViewModel> TreeViewItemViewModels
+        public override ObservableCollection<TreeViewItemExecutorViewModel> TreeViewItemViewModels
         {
             get
             {
@@ -48,7 +47,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
+        public override PageContextViewModel Context { get; set; }
 
         public override Page FramePage
         {
@@ -63,22 +62,22 @@ namespace OrderManager.ViewModels
             }
         }
 
-        public RelayCommand EditQuest
+        public RelayCommand EditExecutor
         {
             get
             {
-                return _editQuest ?? 
-                    (new RelayCommand((selectedItem) => 
+                return _editExecutor ??
+                    (_editExecutor = new RelayCommand((selectedItem) =>
+                {
+                    if (selectedItem == null) return;
+                    Executors editedExecutor = selectedItem as Executors;
+                    editedExecutor = _db.Executors.Find(editedExecutor.Id);
+                    if (editedExecutor != null)
                     {
-                        if (selectedItem == null) return;
-                        Quests editedQuest = selectedItem as Quests;
-                        editedQuest = _db.Quests.Find(editedQuest.Id);
-                        if (editedQuest != null)
-                        {
-                            _db.Entry(editedQuest).State = EntityState.Modified;
-                            _db.SaveChanges();
-                        }
-                    }));
+                        _db.Entry(editedExecutor).State = EntityState.Modified;
+                        _db.SaveChanges();
+                    }
+                }));
             }
         }
 

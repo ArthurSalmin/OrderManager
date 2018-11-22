@@ -1,5 +1,6 @@
 ﻿using OrderManager.Commands;
 using OrderManager.Models;
+using OrderManager.ViewModels.EntitiesViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace OrderManager.ViewModels
+namespace OrderManager.ViewModels.TreeViewItemViewModels
 {
     class TreeViewItemProjectViewModel : TreeViewItemViewModel<TreeViewItemProjectViewModel>, INotifyPropertyChanged
     {
@@ -23,6 +24,7 @@ namespace OrderManager.ViewModels
         public TreeViewItemProjectViewModel()
         {
             _db = new ManagerContext();
+            Context = new ProjectViewModel();
             Context.PageUri = new Uri(_pageProjectPath, UriKind.RelativeOrAbsolute);
         }
 
@@ -50,7 +52,7 @@ namespace OrderManager.ViewModels
                 OnPropertyChanged("TreeViewItemViewModels");
             }
         }
-        public override PageContextViewModel Context { get; set; } = new PageContextViewModel();
+        public override PageContextViewModel Context { get; set; }
 
         public override Page FramePage
         {
